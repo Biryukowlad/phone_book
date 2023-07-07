@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #ceced7;
+}
+.main_info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10%;
+}
+.main_window {
+    background-color: #8390ae;
+}
+.header {
+    background-color: aqua;
+}
