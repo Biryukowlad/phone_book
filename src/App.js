@@ -3,6 +3,8 @@ import Header from './components/Header';
 import Phones from './components/Phones';
 import ModalWindow from './components/ModalWindow';
 import './css/style.css'
+import { Button, Card, Container, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
+import {FaPhoneSquareAlt} from 'react-icons/fa'
 
 class App extends React.Component {
     constructor(props) {
@@ -30,19 +32,41 @@ class App extends React.Component {
     }
     render() {
         return (
-            <div className='main_info'>
-                <div className='main_window'>
-                    <Header title='Телефонная книга' className='header'/>
-                    <Phones phones={this.state.phones} onDelete={this.deletePhone}/>
-                    <button onClick={() => {
-                    this.setState({
-                        openModal: true
-                    })
-                }
-                }>Добавить</button>
-                {this.state.openModal && <ModalWindow opMod={this.state.openModal} onClickCross={this.closeModal} onAdd={this.addPhone}/>}
-                </div>
-            </div>
+            <Container className="main_info">
+                <Card style={{width: 600}} className='card'>
+                    <ListGroup>
+                        <ListGroupItem className='list_group'>
+                            <h2 className='title'>Телефонная книга</h2>
+                        </ListGroupItem>
+                        <ListGroupItem className='search_item'>
+                            <Row className="row">
+                                <Col className='icon_phone'>
+                                    <div>
+                                        <FaPhoneSquareAlt size={28}/>
+                                    </div>
+                                </Col>
+                                <Col className='search_col'>
+                                    <div>
+                                        <input placeholder="Поиск" className="search"/>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </ListGroupItem>
+                        <ListGroupItem>
+                            <Phones phones={this.state.phones} onDelete={this.deletePhone}/>
+                        </ListGroupItem>
+                        <ListGroupItem className='list_group'>
+                            <Button className='button' onClick={() => {
+                            this.setState({
+                                openModal: true
+                            })
+                            }
+                            }>Добавить</Button>
+                        </ListGroupItem>
+                            {this.state.openModal && <ModalWindow opMod={this.state.openModal} onClickCross={this.closeModal} onAdd={this.addPhone}/>}
+                    </ListGroup>
+                </Card>
+            </Container>
         )
     }
     addPhone(phone) {

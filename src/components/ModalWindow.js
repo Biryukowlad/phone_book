@@ -2,6 +2,8 @@ import React from 'react'
 import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import AddPhone from './AddPhone';
+import { Button, Card, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
+import '../css/style.css'
 
 class ModalWindow extends React.Component {
     // constructor(props) {
@@ -19,14 +21,13 @@ class ModalWindow extends React.Component {
     // }
 
     //  onClose={this.onClickCross}
-
     render() {
         return (
-            <div>
-                {this.props.opMod && <Modal open={this.props.opMod}>
+            <Container className="main_info">
+                <Modal open={this.props.opMod} center>
                     <AddPhone onAdd={this.props.onAdd} onClickCross={this.props.onClickCross}/>
-                </Modal>}
-            </div>
+                </Modal>
+            </Container>
         )
     }  
 }

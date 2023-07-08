@@ -4,14 +4,112 @@
     background-color: #ceced7;
 }
 .main_info {
+    margin-top: 7%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10%;
+    color: #002445;
 }
-.main_window {
-    background-color: #8390ae;
+.title {
+    padding: 1%;
+    border-radius: 3%;
+    border: dashed #002445;
+    text-align: center;
 }
-.header {
-    background-color: aqua;
+.card {
+    padding: 0.7%;
+    border-radius: 3%;
+    border: thick double #d2354c;
+}
+.list_group {
+    margin: 0%;
+    text-align: center;
+    padding: 0;
+    border: 0;
+    padding: 1%;
+}
+.justify_content_start {
+    justify-content: start;
+}
+.border {
+    border: #d2354c;
+    border-radius: 3%;
+}
+.button {
+    padding: 1%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    align-self: self-end;
+    border: solid #002445;
+    border-radius: 15%;
+}
+.button:hover {
+    transform: scale(1.1);
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+}
+.list_phones {
+    width: 100%;
+}
+.icon_margin {
+    margin-top: 20%;
+    margin-bottom: 20%;
+    position: relative;
+    right: 80%;
+}
+.placehldr {
+    width: 80%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    color: #002445;
+}
+.search_col {
+    width: 90%;
+}
+.search {
+    border-radius: 5%;
+    width: 100%;
+    position: relative;
+    right: 3%;
+}
+.search_item {
+    margin-top: 2%;
+    align-content: center;
+    border-radius: 3%;
+    border: solid #002445;
+}
+.icon_phone {
+    margin-left: 1%;
+    position: relative;
+    top: 50%;
+}
+.phone_row {
+    border-radius: 3%;
+    border: solid #002445;
+    margin-bottom: 2%;
+}
+.name_phone_col {
+    width: 80%;
+    justify-content: start;
+    align-content: start;
+    position: relative;
+    right: 3%;
+}
+.label_like {
+    margin-left: 2%;
+}
+.checkbx {
+    position: relative;
+    right: 85%;
+}
+.modal_window {
+    margin-top: 200%;
+    color: black;
+    background-color: #d2354c;
+    border: 20%;
+    border-color: aqua;
 }
