@@ -123,14 +123,12 @@
 body.active-modal {
     overflow-y: hidden;
 }
-
 .btn-modal {
     padding: 10px 20px;
     display: block;
     margin: 100px auto 0;
     font-size: 18px;
 }
-
 .modal, .overlay {
     width: 100vw;
     height: 100vh;
@@ -140,7 +138,6 @@ body.active-modal {
     bottom: 0;
     position: fixed;
 }
-
 .overlay {
     background: rgba(49,49,49,0.8);
 }
@@ -155,7 +152,6 @@ body.active-modal {
     max-width: 600px;
     min-width: 300px;
 }
-
 .close-modal {
     position: absolute;
     top: 10px;

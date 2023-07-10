@@ -7,19 +7,19 @@ import { Container, Button } from 'react-bootstrap';
 import '../css/style.css'
 
 
-const ModalWindow = observer( () => {
+const ModalWindow = observer( (props) => {
+  const getCreatedPhoneInModal = (created_phone) => {
+    props.getCreatedPhoneInApp(created_phone);
+  };
   const [modal, setModal] = useState(false);
-
   const toggleModal = () => {
     setModal(!modal);
   };
-
 //   if(modal) {
 //     document.body.classList.add('active-modal')
 //   } else {
 //     document.body.classList.remove('active-modal')
 //   }
-
   return (
     <div>
         <div className='list_group'><Button onClick={toggleModal} className="button">Добавить</Button></div>
@@ -28,7 +28,7 @@ const ModalWindow = observer( () => {
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
           <Button className='button_close' onClick={toggleModal} >x</Button>
-            <AddPhone />
+            <AddPhone getCreatedPhoneInModal={getCreatedPhoneInModal} closeModal={toggleModal}/>
           </div>
         </div>
       )}

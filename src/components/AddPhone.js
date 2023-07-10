@@ -8,8 +8,9 @@ const AddPhone = observer((props) => {
     let name = ''
     let phone_number = ''
     let islike = false
-    const clickCreate = async(name_per, phone_per, islike_per) => {
-        create_phone(phone_per, name_per, islike_per)
+    const clickCreate = async() => {
+        create_phone(phone_number, name, islike).then(data => props.getCreatedPhoneInModal(data))
+        props.closeModal()
     }
     return (
         <Container className="main_info">
@@ -32,7 +33,7 @@ const AddPhone = observer((props) => {
                             </Row>
                         </ListGroupItem>
                         <ListGroupItem className="list_group">
-                            <Button className='button' onClick={clickCreate(name, phone_number, islike)} >Создать</Button>
+                            <Button className='button' onClick={clickCreate} >Создать</Button>
                         </ListGroupItem>
                     </ListGroup>
                 </form>

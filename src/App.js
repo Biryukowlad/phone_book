@@ -9,6 +9,87 @@ import {FaPhoneSquareAlt} from 'react-icons/fa'
 import { get_all_phones } from './http/phoneAPI';
 
 const App = observer(() => {
+    const {phone} = useContext(Context)
+    useEffect(() => {
+        get_all_phones().then(data => phone.setPhones(data))
+    }, [])
+    const changeArrayAfterCreate = (needed_phone) => {
+        phone.setPhones(helpChangeArrayAfterCreate(phone.phones, needed_phone))
+    }
+    const helpChangeArrayAfterCreate = (currentPhones, needed_phone) => {
+        //currentPhone.push(needed_phone)
+        let first_unliked_index = currentPhones.findIndex(elem => elem.islike_person == false)
+        if (currentPhones.length == 0) currentPhones.splice(0, 0, needed_phone)
+        else {
+            if (needed_phone.islike_person) {
+                if (first_unliked_index == -1) {
+                    let i = 0
+                    for(; i < currentPhones.length; i++) if(currentPhones[i].name_person > needed_phone.name_person) break
+                    currentPhones.splice(i, 0, needed_phone)
+                }
+                else {
+                    let i = 0
+                    for(; i < first_unliked_index; i++) if(currentPhones[i].name_person > needed_phone.name_person) break
+                    currentPhones.splice(i, 0, needed_phone)
+                }
+            }
+            else {
+                if (first_unliked_index == -1) currentPhones.splice(currentPhones.length, 0, needed_phone)
+                else {
+                    let i = 0
+                    for(i = first_unliked_index; i < currentPhones.length; i++) if(currentPhones[i].name_person > needed_phone.name_person) break
+                    currentPhones.splice(i, 0, needed_phone)
+                }
+            }
+        }
+        return currentPhones;
+
+        // let first_unliked_index = currentPhones.findIndex(elem => elem.islike_person == false)
+        // if (currentPhones.length == 0) currentPhones.splice(0, 0, needed_phone)
+        // else {
+        //     if (needed_phone.islike_person) {
+        //         if (first_unliked_index == -1) {
+        //             let i = 0
+        //             for(i = 0; i < currentPhones.length; i++) {
+        //                 if(currentPhones[i].name_person > needed_phone.name_person) {
+        //                     break
+        //                 }
+        //             }
+        //             currentPhones.splice(i, 0, needed_phone)
+        //         }
+        //         else {
+        //             let i = 0
+        //             for(i = 0; i < first_unliked_index; i++) {
+        //                 if(currentPhones[i].name_person > needed_phone.name_person) {
+        //                     break
+        //                 }
+        //             }
+        //             currentPhones.splice(i, 0, needed_phone)
+        //         }
+        //     }
+        //     else {
+        //         if (first_unliked_index == -1) {
+        //             currentPhones.splice(currentPhones.length, 0, needed_phone)
+        //         }
+        //         else {
+        //             let i = 0
+        //             for(i = first_unliked_index; i < currentPhones.length; i++) {
+        //                 if(currentPhones[i].name_person > needed_phone.name_person) {
+        //                     break
+        //                 }
+        //             }
+        //             currentPhones.splice(i, 0, needed_phone)
+        //         }
+        //     }
+        // }
+        // return currentPhones;
+
+
+    }
+    const getCreatedPhoneInApp = (created_phone) => {
+        changeArrayAfterCreate(created_phone)
+    };
+    
     //const {phone} = useContext(Context)
     let openModal = false
     // useEffect(() => {
@@ -50,7 +131,7 @@ const App = observer(() => {
                     <ListGroupItem>
                         <Phones />
                     </ListGroupItem>
-                    <ModalWindow/>
+                    <ModalWindow getCreatedPhoneInApp={getCreatedPhoneInApp}/>
                 </ListGroup>
             </Card>
         </Container>

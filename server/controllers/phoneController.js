@@ -5,16 +5,18 @@ const ApiError = require('../errors/ApiError')
 class PhoneController {
 
     async createPhone(req, res, next) {
-        const {phone_num_person, name_person, islike_person} = req.body
-        if (!phone_num_person || !name_person) {
-            return next(ApiError.badRequest('Некорректный логин или пароль'))
-        }
-        const candidate = await Phone.findOne({where: {phone_num_person}})
-        if (candidate) {
-            return next(ApiError.badRequest('Контакт с таким номером телефона уже есть в телефонной книге!'))
-        }
+        res.header("Access-Control-Allow-Origin", "*")
+        res.header("Access-Control-Allow-Headers", "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authentication")
+        let {phone_num_person, name_person, islike_person} = req.body
+        // if (!phone_num_person || !name_person) {
+        //     return next(ApiError.badRequest('Некорректный логин или пароль'))
+        // }
+        // const candidate = await Phone.findOne({where: {phone_num_person}})
+        // if (candidate) {
+        //     return next(ApiError.badRequest('Контакт с таким номером телефона уже есть в телефонной книге!'))
+        // }
         const phone = await Phone.create({phone_num_person, name_person, islike_person})
-        return res.json(phone)
+        return res.json({phone})
     }
     async addPhone(req, res) {
         let data = {
@@ -26,7 +28,7 @@ class PhoneController {
         res.status(200).send(phone)
     }
     async getAllPhones(req, res) {
-        let phones = await Phone.findAll({attributes: ['id_person', 'phone_num_person', 'name_person', 'islike_person']})
+        let phones = await Phone.findAll({attributes: ['id_person', 'phone_num_person', 'name_person', 'islike_person'], order: [['islike_person', 'DESC'], ['name_person', 'ASC']]})
         return res.json({phones})
     }
     async deletePhone(req, res) {
