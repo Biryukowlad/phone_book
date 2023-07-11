@@ -1,16 +1,26 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { observer } from 'mobx-react-lite';
 import Phone from "./Phone";
 import { Context } from '../index';
-import { Container, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Container, ListGroup, ListGroupItem, Row, Col } from 'react-bootstrap';
+import {FaPhoneSquareAlt} from 'react-icons/fa'
 import '../css/style.css'
 import { get_all_phones } from '../http/phoneAPI';
 
 const Phones = observer((props) => {
     const {phone} = useContext(Context)
+    const [searchText, setSearchText] = useState("");
+    const [searchPhones, setSearchPhones] = useState([]);
     useEffect(() => {
         get_all_phones().then(data => phone.setPhones(data))
     }, [])
+    const handleChange = event => {
+        setSearchText(event.target.value);
+    };
+    useEffect(() => {
+        const srchPhones = phone.phones.filter(onePhone => onePhone.name_person.toLowerCase().startsWith(searchText));
+        setSearchPhones(srchPhones);
+    }, [searchText]);
     const changeArray = (phone_id) => {
         phone.setPhones(helpChangeArray(phone.phones, phone_id))
     }
@@ -71,11 +81,22 @@ const Phones = observer((props) => {
         if (foundPhoneIndex !== -1) currentPhone.splice(foundPhoneIndex, 1);
         return currentPhone;
     }
-    if (phone.phones.length != 0) {
+    const result = !searchText ? phone.phones : searchPhones
+    if (result.length != 0) {
         return (
             <Container className="main_info">
                 <ListGroup className="list_phones">
-                    {phone.phones.map((el) => (
+                    <ListGroupItem className='search_item_phones'>
+                        <Row className="row">
+                            <Col className='icon_phone'>
+                                    <FaPhoneSquareAlt size={28}/>
+                            </Col>
+                            <Col className='search_col'>
+                                    <input type="search" placeholder="Поиск" className="search" value={searchText} onChange={handleChange}/>
+                            </Col>
+                        </Row>
+                    </ListGroupItem>
+                    {result.map((el) => (
                         <ListGroupItem className="phone_row">
                             <Phone key={el.id_person} one_phone={el} onDelete={changeArrayDelete} onChangeArray={changeArray}/>
                         </ListGroupItem>
@@ -83,12 +104,25 @@ const Phones = observer((props) => {
                 </ListGroup>
             </Container>
         ) }
-    else
+    else {
         return (
-            <div>
-                <h2>Номеров телефонов нет!</h2>
-            </div>
+            <Container className="main_info">
+                <ListGroup className="list_phones">
+                    <ListGroupItem className='search_item_phones'>
+                        <Row className="row">
+                            <Col className='icon_phone'>
+                                    <FaPhoneSquareAlt size={28}/>
+                            </Col>
+                            <Col className='search_col'>
+                                    <input type="search" placeholder="Поиск" className="search" value={searchText} onChange={handleChange}/>
+                            </Col>
+                        </Row>
+                    </ListGroupItem>
+                    <h2>Номеров телефонов нет</h2>
+                </ListGroup>
+            </Container>
         )
+    }
 });
 export default Phones;
 

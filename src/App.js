@@ -102,8 +102,6 @@ const App = observer(() => {
     // }
     // function deletePhone(id) { phone.phones.filter((el) => el.id !== id) }
      function closeModal() { openModal = false }
-    console.log("Это openModal")
-    console.log(openModal)
     // console.log("Это phone.phones")
     // console.log(phone.phones)
     // if (phone.phones.length != 0) {
@@ -113,20 +111,6 @@ const App = observer(() => {
                 <ListGroup>
                     <ListGroupItem className='list_group'>
                         <h2 className='title'>Телефонная книга</h2>
-                    </ListGroupItem>
-                    <ListGroupItem className='search_item'>
-                        <Row className="row">
-                            <Col className='icon_phone'>
-                                <div>
-                                    <FaPhoneSquareAlt size={28}/>
-                                </div>
-                            </Col>
-                            <Col className='search_col'>
-                                <div>
-                                    <input placeholder="Поиск" className="search"/>
-                                </div>
-                            </Col>
-                        </Row>
                     </ListGroupItem>
                     <ListGroupItem>
                         <Phones />

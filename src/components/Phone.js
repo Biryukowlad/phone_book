@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import {AiOutlineClose, AiFillHeart, AiOutlineHeart} from 'react-icons/ai'
 import { BsFillPersonFill } from "react-icons/bs";
 import { Row, Col } from 'react-bootstrap';
+import Image from "react-bootstrap/Image";
 import '../css/style.css'
 import { liked_phone, unliked_phone, delete_phone } from '../http/phoneAPI';
 
@@ -24,7 +25,8 @@ const Phone = observer((props) => {
         <Row className="row">
             <Col>
                 <div>
-                    <BsFillPersonFill size={42}/>
+                    {!props.one_phone.photo_person && <BsFillPersonFill size={42}/>}
+                    {props.one_phone.photo_person && <Image className="icon_phone" width={40} height={40} src={'http://localhost:8081/' + props.one_phone.photo_person}></Image>}
                 </div>
             </Col>
             <Col className="name_phone_col">

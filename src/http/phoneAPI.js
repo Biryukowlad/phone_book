@@ -1,7 +1,11 @@
 import { $userHost} from "./index";
 
-export const create_phone = async (phone_num_person, name_person, islike_person) => {
-    const {data} = await $userHost.post('api/phone/create_phone', {phone_num_person, name_person, islike_person})
+// export const create_phone = async (phone_num_person, name_person, islike_person) => {
+//     const {data} = await $userHost.post('api/phone/create_phone', {phone_num_person, name_person, islike_person})
+//     return data.phone
+// }
+export const create_phone = async (new_phone) => {
+    const {data} = await $userHost.post('api/phone/create_phone', new_phone)
     return data.phone
 }
 export const add_phone = async () => {

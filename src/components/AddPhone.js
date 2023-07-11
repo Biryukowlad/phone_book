@@ -6,11 +6,27 @@ import { create_phone } from '../http/phoneAPI';
 
 const AddPhone = observer((props) => {
     let name = ''
-    let phone_number = ''
+    let phone_number = null
     let islike = false
+    let photo = null
     const clickCreate = async() => {
-        create_phone(phone_number, name, islike).then(data => props.getCreatedPhoneInModal(data))
-        props.closeModal()
+        if(name.length == 0) alert("Пожалуйства введите имя!")
+        else if(!(/^[\d\+][\d\(\)\ -]{4,14}\d$/.test(phone_number))) alert("Пожалуйства кооректно введите номер телефона!")
+        else {
+            const formData = new FormData()
+            formData.append('phone_num_person', phone_number)
+            formData.append('name_person', name)
+            formData.append('islike_person', islike)
+            formData.append('photo_person', photo)
+            create_phone(formData).then(data => props.getCreatedPhoneInModal(data))
+            props.closeModal()
+        }
+        // try {
+        //     create_phone(phone_number, name, islike).then(data => props.getCreatedPhoneInModal(data))
+        //     props.closeModal()
+        // } catch(e) {
+        //     alert(e.response.data.message)
+        // }
     }
     return (
         <Container className="main_info">
@@ -24,13 +40,17 @@ const AddPhone = observer((props) => {
                             <input placeholder="Имя" className="placehldr" onChange={(e) => {name = e.target.value}}/>
                         </ListGroupItem>
                         <ListGroupItem>
-                            <input placeholder="Телефон" className="placehldr" onChange={(e) => {phone_number = e.target.value}}/>
+                            <input type="tel" placeholder="Телефон" className="placehldr" onChange={(e) => {phone_number = e.target.value}}/>
                         </ListGroupItem>
                         <ListGroupItem>
                             <Row className="row_modal">
-                                <label htmlFor="islike" className="label_like">Favorites</label>
+                                <label htmlFor="islike" className="label_like">Favourites</label>
                                 <input type="checkbox" id='islike' className="checkbx" onChange={(e) => {islike = e.target.checked}}/>
                             </Row>
+                        </ListGroupItem>
+                        <ListGroupItem>
+                            <div className="label_file">Можете загрузить фотографию контакта</div>
+                            <input type="file" accept=".png, .jpg, .jpeg" className="placehldr" onChange={(e) => {photo = e.target.files[0]}}/>
                         </ListGroupItem>
                         <ListGroupItem className="list_group">
                             <Button className='button' onClick={clickCreate} >Создать</Button>

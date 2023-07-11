@@ -96,6 +96,12 @@
     border-radius: 3%;
     border: solid #002445;
 }
+.search_item_phones {
+    margin-bottom: 20px;
+    align-content: center;
+    border-radius: 3%;
+    border: solid #002445;
+}
 .icon_phone {
     margin-left: 1%;
     position: relative;
@@ -157,4 +163,8 @@ body.active-modal {
     top: 10px;
     right: 10px;
     padding: 5px 7px;
+}
+.label_file {
+    padding-top: 5%;
+    padding-left: 2%;
 }

@@ -19,6 +19,10 @@ const Phone = sequelize.define("phone", {
     islike_person: {
         type: DataTypes.BOOLEAN,
         allowNull: false
+    },
+    photo_person: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, {
     timestamps: false
