@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Modal } from 'react-responsive-modal';
 import { observer } from 'mobx-react-lite';
 import 'react-responsive-modal/styles.css';
 import AddPhone from './AddPhone';
-import { Container, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import '../css/style.css'
 
 
@@ -15,11 +14,6 @@ const ModalWindow = observer( (props) => {
   const toggleModal = () => {
     setModal(!modal);
   };
-//   if(modal) {
-//     document.body.classList.add('active-modal')
-//   } else {
-//     document.body.classList.remove('active-modal')
-//   }
   return (
     <div>
         <div className='list_group'><Button onClick={toggleModal} className="button">Добавить</Button></div>
