@@ -34,3 +34,6 @@ package.json бэка:
     "sequelize": "^6.32.1",
     "uuid": "^9.0.0"
   }
+
+Ссылка на гугл док с описанием приложения, демонстрацией функций и работоспособности, инструкцией:
+https://docs.google.com/document/d/1n98FiHeji6WXk85QS8dOq4stZ35LZwMKGZnmZdLylhU/edit?usp=sharing
